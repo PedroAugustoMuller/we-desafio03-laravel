@@ -1,4 +1,3 @@
-<?php dd(session()->get('planoSelecionado'))?>
 <x-layout>
     <section class="h-100 h-custom" style="background-color: #d2c9ff;">
         <div class="container py-5 h-100">
@@ -12,10 +11,39 @@
                                         <div class="d-flex justify-content-between align-items-center mb-5">
                                             <h1 class="fw-bold mb-0">Associação</h1>
                                         </div>
-                                        <?php ////include ('includes/planoSelecionado.php'); ?><!---->
+                                        @if(isset($plano))
+                                            <hr class="my-4">
+
+                                            <div class="row mb-4 d-flex justify-content-between align-items-center">
+                                                <div class="col-md-2 col-lg-2 col-xl-2">
+                                                    <img
+                                                        src="{{$plano->imagem}}"
+                                                        class="img-fluid rounded-3" alt="Imagem Produto">
+                                                </div>
+                                                <div class="col-md-3 col-lg-3 col-xl-3">
+                                                    <h6 class="text-muted">Plano</h6>
+                                                    <h6 class="mb-0">{{$plano->dscplano}}</h6>
+                                                </div>
+                                                <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+
+                                                    <h6 class="mb-0">Mensalidade: R$ {{$plano->valor_mensal}}</h6>
+
+                                                </div>
+                                                <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                                                    <a href="#!" class="text-muted"><i class="fas fa-times"></i></a>
+                                                </div>
+                                            </div>
+                                            <hr class="my-4">
+                                        @else
+                                            <hr class="my-4">
+                                            <div class="col-md-3 col-lg-3 col-xl-3">
+                                                <h6 class="mb-0">Nenhum plano selecionado</h6>
+                                            </div>
+                                            <hr class="my-4">
+                                        @endif
                                         <div class="pt-5">
-                                            <h6 class="mb-0"><a href="./planos" class="text-body"><i
-                                                        class="fas fa-long-arrow-alt-left me-2"></i>Outro plano</a>
+                                            <h6 class="mb-0"><a href="/" class="text-body"><i
+                                                        class="fas fa-long-arrow-alt-left me-2"></i>Outros planos</a>
                                             </h6>
                                         </div>
                                     </div>
@@ -26,10 +54,9 @@
                                         <hr class="my-4">
                                         <div class="d-flex justify-content-between mb-5">
                                             <h5 class="text-uppercase">Preço Total</h5>
-                                            <!----><?php ////if($plano->getValor() != $valorDesconto){
-//                                            }else {
-//                                                echo '<h5>'.$plano->getValor().'</h5>';
-//                                            }?>
+                                            @if(isset($plano))
+                                            @else
+                                            @endif
 
                                         </div>
                                         <form method="post">

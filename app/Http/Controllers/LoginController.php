@@ -32,4 +32,9 @@ class LoginController extends Controller
             return redirect()->route('login')->with('error',$e->getMessage());
         }
     }
+
+    public static function decodeToken()
+    {
+        $token = session()->get('token');
+    }
 }
