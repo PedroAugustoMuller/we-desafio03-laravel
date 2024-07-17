@@ -16,4 +16,8 @@ class UserService
         ])->json();
         return $response['result'];
     }
+    public static function logout($data)
+    {
+
+    }
 }

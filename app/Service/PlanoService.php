@@ -2,7 +2,7 @@
 
 namespace App\Service;
 
-use App\Http\Controllers\LoginController;
+use App\Http\Controllers\UserController;
 use App\Models\Plano;
 use Exception;
 use Illuminate\Support\Facades\Http;
@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Http;
 class PlanoService
 {
     public static function getAllPlanos(){
-        $response = Http::get('https://ah.we.imply.com/pedro/planos')->json();
+        $response = Http::get('https://ah.we.imply.com/pedro/planos')->json()['result'];
         if(!$response){
             throw new Exception("Erro ao se comunicar com o servidor");
         }
@@ -26,7 +26,7 @@ class PlanoService
     }
     public static function getDescontoPlano($idPlano)
     {
-        $decodedToken = (array)LoginController::decodeToken();
+        $decodedToken = (array)UserController::decodeToken();
         $userId = $decodedToken['userId'];
         $response = Http::post('https://ah.we.imply.com/pedro/desconto',[
             'idpessoa' => $userId,

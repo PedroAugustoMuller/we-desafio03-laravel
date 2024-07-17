@@ -1,14 +1,4 @@
-<?php
-//session_start();
-//use Imply\ListaDesafios03\controller\UserController;
-//
-//$userController = new UserController();
-//if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email']) && isset($_POST['cpf']))
-//{
-//    $userController->login($_POST['email'], $_POST['cpf']);
-//}
-//?><!---->
-    <!doctype html>
+ <!doctype html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">

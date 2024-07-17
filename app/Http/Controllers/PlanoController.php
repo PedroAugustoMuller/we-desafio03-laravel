@@ -4,9 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Service\PlanoService;
 use Exception;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
-use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 
 class PlanoController extends Controller
@@ -43,14 +40,6 @@ class PlanoController extends Controller
     }
     public function parcelas(Request $request)
     {
-        try{
-            if($request->session()->get('idplano') == null && !$request->session()->get('contratou'))
-            {
-                return view('parcelas');
-            }
-        }catch(Exception $e){
-            $request->session()->flash('error',$e->getMessage());
-            return view('home');
-        }
+        return view('parcelas');
     }
 }

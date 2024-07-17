@@ -54,7 +54,7 @@
                                         <hr class="my-4">
                                         @if(isset($plano))
                                             <div class="d-flex justify-content-between mb-5">
-                                                <h5 class="text-uppercase">Preço Final</h5>
+                                                <h5 class="text-uppercase">Mensalidade</h5>
                                                 @if(isset($planoDesconto))
                                                     @if($planoDesconto < $plano->valor_mensal)
                                                         <h5 style="color: green">OFF {{100-$planoDesconto*100/$plano->valor_mensal}}%</h5>
