@@ -43,7 +43,7 @@
                                         @endif
                                         <div class="pt-5">
                                             <h6 class="mb-0"><a href="/" class="text-body"><i
-                                                        class="fas fa-long-arrow-alt-left me-2"></i>Outros planos</a>
+                                                        class="fas fa-long-arrow-alt-left me-2"></i>Planos</a>
                                             </h6>
                                         </div>
                                     </div>
@@ -54,15 +54,20 @@
                                         <hr class="my-4">
                                         @if(isset($plano))
                                             <div class="d-flex justify-content-between mb-5">
-                                                <h5 class="text-uppercase">Mensalidade</h5>
+                                                <h6 class="text-uppercase">Mensalidade</h6>
                                                 @if(isset($planoDesconto))
                                                     @if($planoDesconto < $plano->valor_mensal)
-                                                        <h5 style="color: green">OFF {{100-$planoDesconto*100/$plano->valor_mensal}}%</h5>
+                                                        <h6 style="color: green">OFF {{100-$planoDesconto*100/$plano->valor_mensal}}%</h6>
                                                     @endif
-                                                    <h5>R$ {{$planoDesconto}}</h5>
+                                                    <h6>R$ {{$planoDesconto}}</h6>
                                                 @else
+                                                    <h6>{{$plano->valor_mensal}}</h6>
                                                 @endif
                                             </div>
+                                            <form action="/associacao">
+                                                <input type="text" name="cep" placeholder="cep" id="">
+                                                <input type="submit" value="Verificar Desconto">
+                                            </form>
                                             <form method="post" action="/parcelas">
                                                 @csrf
                                                 <input type="hidden" name="associar">

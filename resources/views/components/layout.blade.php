@@ -27,9 +27,16 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/login">Login</a>
-                </li>
+                @if(session()->get('token') == null)
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/login">Login</a>
+                    </li>
+                @else
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/logout">Logout</a>
+                    </li>
+                @endif
+
                 <li class="nav-item">
                     <a class="nav-link" href="/">Planos</a>
                 </li>

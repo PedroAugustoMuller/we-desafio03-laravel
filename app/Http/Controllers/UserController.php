@@ -24,8 +24,8 @@ class UserController extends Controller
                 'cpf' => $request->input("cpf"),
             ];
             $response = UserService::login($data);
-            if(array_key_exists("error", $response)){
-                throw new Exception($response['error']);
+            if(array_key_exists("erro", $response)){
+                throw new Exception($response['erro']);
             }
             $request->session()->put('token', $response['token']);
             $userData = (array) self::decodeToken();
@@ -46,5 +46,10 @@ class UserController extends Controller
         $token = session()->get('token');
         $key = 'UGVkcm8gQXVndXN0byBNdWxsZXI=';
         return JWT::decode($token, new Key($key, 'HS256'));
+    }
+    public static function logout(Request $request)
+    {
+        session()->flush();
+        return redirect()->route('login');
     }
 }

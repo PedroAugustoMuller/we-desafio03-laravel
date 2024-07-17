@@ -11,8 +11,8 @@ class PlanoService
 {
     public static function getAllPlanos(){
         $response = Http::get('https://ah.we.imply.com/pedro/planos')->json()['result'];
-        if(!$response){
-            throw new Exception("Erro ao se comunicar com o servidor");
+        if(isset($response['erro'])){
+            throw new Exception($response['erro']);
         }
         $planos = array();
         foreach ($response as $plano) {
@@ -24,7 +24,7 @@ class PlanoService
         $reponse = self::getAllPlanos();
         return $reponse[$id];
     }
-    public static function getDescontoPlano($idPlano)
+    public static function getDescontoPlanoByUser($idPlano)
     {
         $decodedToken = (array)UserController::decodeToken();
         $userId = $decodedToken['userId'];
@@ -32,6 +32,23 @@ class PlanoService
             'idpessoa' => $userId,
             'idplano' => $idPlano,
         ])->json();
+        if(isset($response['erro']))
+        {
+            throw new Exception($response['erro']);
+        }
+        return $response['result']['valor_mensalidade'];
+    }
+    public static function getDescontoPlanoByCEP($idPlano,$cep)
+    {
+        $cep = filter_var($cep, FILTER_SANITIZE_NUMBER_INT);
+        $response = Http::post('https://ah.we.imply.com/pedro/desconto',[
+            'idpessoa' => $cep,
+            'idplano' => $idPlano,
+        ])->json();
+        if(isset($response['erro']))
+        {
+            throw new Exception($response['erro']);
+        }
         return $response['result']['valor_mensalidade'];
     }
 }

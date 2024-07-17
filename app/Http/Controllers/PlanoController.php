@@ -30,7 +30,14 @@ class PlanoController extends Controller
                 $request->session()->put('idplano',$request['idplano']);
             }
             $data['plano'] = PlanoService::getPlanoById(session()->get('idplano'));
-            $data['planoDesconto'] = PlanoService::getDescontoPlano(session()->get('idplano'));
+            if(session()->get('user') != null)
+            {
+                $data['planoDesconto'] = PlanoService::getDescontoPlanoByUser($data['plano']->idplano);
+            }
+            if(isset($request['cep']))
+            {
+                $data['planoDesconto'] = PlanoService::getDescontoPlanoByCEP($request['idplano'],$request['cep']);
+            }
             return view('associacao',$data);
         }catch(Exception $e){
             $request->session()->flash('error',$e->getMessage());
