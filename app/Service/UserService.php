@@ -14,6 +14,6 @@ class UserService
             'email' => $data['email'],
             'cpf' => $data['cpf'],
         ])->json();
-        session()->put('token', $response['result']);
+        return $response['result'];
     }
 }

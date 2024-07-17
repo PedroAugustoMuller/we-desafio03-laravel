@@ -52,19 +52,30 @@
                                     <div class="p-5">
                                         <h3 class="fw-bold mb-5 mt-2 pt-1">Informações</h3>
                                         <hr class="my-4">
-                                        <div class="d-flex justify-content-between mb-5">
-                                            <h5 class="text-uppercase">Preço Total</h5>
-                                            @if(isset($plano))
-                                            @else
-                                            @endif
+                                        @if(isset($plano))
+                                            <div class="d-flex justify-content-between mb-5">
+                                                <h5 class="text-uppercase">Preço Final</h5>
+                                                @if(isset($planoDesconto))
+                                                    @if($planoDesconto < $plano->valor_mensal)
+                                                        <h5 style="color: green">OFF {{100-$planoDesconto*100/$plano->valor_mensal}}%</h5>
+                                                    @endif
+                                                    <h5>R$ {{$planoDesconto}}</h5>
+                                                @else
+                                                @endif
+                                            </div>
+                                            <form method="post" action="/parcelas">
+                                                @csrf
+                                                <input type="hidden" name="associar">
+                                                <input type="submit" data-mdb-button-init data-mdb-ripple-init
+                                                       class="btn btn-dark btn-block btn-lg"
+                                                       data-mdb-ripple-color="dark" value="Finalizar Associação">
+                                            </form>
+                                        @else
+                                                <input disabled type="submit" data-mdb-button-init data-mdb-ripple-init
+                                                       class="btn btn-dark btn-block btn-lg"
+                                                       data-mdb-ripple-color="dark" value="Finalizar Associação">
+                                        @endif
 
-                                        </div>
-                                        <form method="post">
-                                            <input type="hidden" name="associar">
-                                            <input type="submit" data-mdb-button-init data-mdb-ripple-init
-                                                   class="btn btn-dark btn-block btn-lg"
-                                                   data-mdb-ripple-color="dark" value="Finalizar Associação">
-                                        </form>
                                     </div>
                                 </div>
                             </div>

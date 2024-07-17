@@ -59,7 +59,12 @@
                         <input type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg"
                                style="padding-left: 2.5rem; padding-right: 2.5rem;" value="Login">
                     </div>
-                    <?php //include '../src/view/includes/error.php' ?>
+
+                    @if(session()->get('error') !== null)
+                        <div class="alert alert-danger" style="margin: 10px 10px 10px 0px;">{{session()->get('error')}}</div>
+                    @else
+                        <div class="alert alert-danger" style="margin: 10px 10px 10px 0px; visibility: hidden "></div>
+                    @endif
                 </form>
             </div>
         </div>

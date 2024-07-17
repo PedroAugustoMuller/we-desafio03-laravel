@@ -1,4 +1,5 @@
 <?php
+
 //session_start();
 //use Imply\ListaDesafios03\controller\PlanoController;
 //
@@ -27,21 +28,25 @@
         <div class="container py-5">
             <h4 class="text-center mb-5"><strong>Planos</strong></h4>
             <div class="container-planos">
-                @foreach($planos as $plano)
-                    <div class="card" style="width:300px">
-                        <img class="card-img-top" src="{{$plano->imagem}}" alt="Card image">
-                        <div class="card-body">
-                            <h4 class="card-title">{{$plano->dscplano}}</h4>
-                            <p class="card-text">{{$plano->descricao}}</p>
-                            <p class="card-text">Mensalidade: R$ {{$plano->valor_mensal}}</p>
-                            <form method="post" action="/associacao">
-                                @csrf
-                                <input type="hidden" name="idplano"value="{{$plano->idplano}}">
-                                <input type="submit" class="btn btn-primary" value="Aderir ao plano">
-                            </form>
+                @if(isset($planos))
+                    @foreach($planos as $plano)
+                        <div class="card" style="width:300px">
+                            <img class="card-img-top" src="{{$plano->imagem}}" alt="Card image">
+                            <div class="card-body">
+                                <h4 class="card-title">{{$plano->dscplano}}</h4>
+                                <p class="card-text">{{$plano->descricao}}</p>
+                                <p class="card-text">Mensalidade: R$ {{$plano->valor_mensal}}</p>
+                                <form method="post" action="/associacao">
+                                    @csrf
+                                    <input type="hidden" name="idplano" value="{{$plano->idplano}}">
+                                    <input type="submit" class="btn btn-primary" value="Aderir ao plano">
+                                </form>
+                            </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                @else
+                    <h5>{{session()->get('error')}}</h5>
+                @endif
             </div>
         </div>
     </section>
