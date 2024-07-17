@@ -9,5 +9,5 @@ Route::get('/logout', [UserController::class,'logout'])->name('logout');
 Route::post('/loginApi', [UserController::class,'loginApi'])->name('login.api');
 Route::get('/', [PlanoController::class,'home'])->name('home');
 Route::match(['get','post'],'/associacao', [PlanoController::class,'associacao'])->name('associacao');
-Route::post('/parcelas', [PlanoController::class,'parcelas'])->name('parcelas');
+Route::match(['get','post'],'/parcelas', [PlanoController::class,'parcelas'])->name('parcelas');
 

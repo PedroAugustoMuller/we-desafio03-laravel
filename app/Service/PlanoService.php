@@ -26,8 +26,7 @@ class PlanoService
     }
     public static function getDescontoPlanoByUser($idPlano)
     {
-        $decodedToken = (array)UserController::decodeToken();
-        $userId = $decodedToken['userId'];
+        $userId = session()->get("user")->userId;
         $response = Http::post('https://ah.we.imply.com/pedro/desconto',[
             'idpessoa' => $userId,
             'idplano' => $idPlano,
@@ -42,13 +41,13 @@ class PlanoService
     {
         $cep = filter_var($cep, FILTER_SANITIZE_NUMBER_INT);
         $response = Http::post('https://ah.we.imply.com/pedro/desconto',[
-            'idpessoa' => $cep,
+            'cep' => $cep,
             'idplano' => $idPlano,
-        ])->json();
+        ])->json()['result'];
         if(isset($response['erro']))
         {
             throw new Exception($response['erro']);
         }
-        return $response['result']['valor_mensalidade'];
+        return $response['valor_mensalidade'];
     }
 }

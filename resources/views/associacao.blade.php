@@ -1,4 +1,10 @@
 <x-layout>
+    <script>
+        $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+    @section('pageTitle','Associação - Portal das Cartas')
     <section class="h-100 h-custom" style="background-color: #d2c9ff;">
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
@@ -11,36 +17,7 @@
                                         <div class="d-flex justify-content-between align-items-center mb-5">
                                             <h1 class="fw-bold mb-0">Associação</h1>
                                         </div>
-                                        @if(isset($plano))
-                                            <hr class="my-4">
-
-                                            <div class="row mb-4 d-flex justify-content-between align-items-center">
-                                                <div class="col-md-2 col-lg-2 col-xl-2">
-                                                    <img
-                                                        src="{{$plano->imagem}}"
-                                                        class="img-fluid rounded-3" alt="Imagem Produto">
-                                                </div>
-                                                <div class="col-md-3 col-lg-3 col-xl-3">
-                                                    <h6 class="text-muted">Plano</h6>
-                                                    <h6 class="mb-0">{{$plano->dscplano}}</h6>
-                                                </div>
-                                                <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-
-                                                    <h6 class="mb-0">Mensalidade: R$ {{$plano->valor_mensal}}</h6>
-
-                                                </div>
-                                                <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                                                    <a href="#!" class="text-muted"><i class="fas fa-times"></i></a>
-                                                </div>
-                                            </div>
-                                            <hr class="my-4">
-                                        @else
-                                            <hr class="my-4">
-                                            <div class="col-md-3 col-lg-3 col-xl-3">
-                                                <h6 class="mb-0">Nenhum plano selecionado</h6>
-                                            </div>
-                                            <hr class="my-4">
-                                        @endif
+                                        <x-associacao.plano :plano="$plano??null"></x-associacao.plano>
                                         <div class="pt-5">
                                             <h6 class="mb-0"><a href="/" class="text-body"><i
                                                         class="fas fa-long-arrow-alt-left me-2"></i>Planos</a>
@@ -52,35 +29,7 @@
                                     <div class="p-5">
                                         <h3 class="fw-bold mb-5 mt-2 pt-1">Informações</h3>
                                         <hr class="my-4">
-                                        @if(isset($plano))
-                                            <div class="d-flex justify-content-between mb-5">
-                                                <h6 class="text-uppercase">Mensalidade</h6>
-                                                @if(isset($planoDesconto))
-                                                    @if($planoDesconto < $plano->valor_mensal)
-                                                        <h6 style="color: green">OFF {{100-$planoDesconto*100/$plano->valor_mensal}}%</h6>
-                                                    @endif
-                                                    <h6>R$ {{$planoDesconto}}</h6>
-                                                @else
-                                                    <h6>{{$plano->valor_mensal}}</h6>
-                                                @endif
-                                            </div>
-                                            <form action="/associacao">
-                                                <input type="text" name="cep" placeholder="cep" id="">
-                                                <input type="submit" value="Verificar Desconto">
-                                            </form>
-                                            <form method="post" action="/parcelas">
-                                                @csrf
-                                                <input type="hidden" name="associar">
-                                                <input type="submit" data-mdb-button-init data-mdb-ripple-init
-                                                       class="btn btn-dark btn-block btn-lg"
-                                                       data-mdb-ripple-color="dark" value="Finalizar Associação">
-                                            </form>
-                                        @else
-                                                <input disabled type="submit" data-mdb-button-init data-mdb-ripple-init
-                                                       class="btn btn-dark btn-block btn-lg"
-                                                       data-mdb-ripple-color="dark" value="Finalizar Associação">
-                                        @endif
-
+                                        <x-associacao.desconto :plano="$plano??null" :planoDesconto="$planoDesconto??null"></x-associacao.desconto>
                                     </div>
                                 </div>
                             </div>
