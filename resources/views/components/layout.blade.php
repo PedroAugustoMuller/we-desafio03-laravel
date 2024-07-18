@@ -26,7 +26,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                @if(session()->get('token') == null)
+                @if(session('token') == null)
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{{route('login')}}">Login</a>
                     </li>
@@ -42,7 +42,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('associacao')}}">Associacao</a>
                 </li>
-                @if(session()->get('planoContratado')!=null)
+                @if(session('planoContratado')!=null)
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('parcelas')}}">Parcelas</a>
                         </li>
@@ -54,8 +54,7 @@
 {{$slot}}
 <footer class="py-3 my-4">
     <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-        <li class="nav-item"><a href="/login" class="nav-link px-2 text-muted">Login</a></li>
-        <li class="nav-item"><a href="/" class="nav-link px-2 text-muted">Home</a></li>
+        <li class="nav-item"><a href="{{route('home')}}" class="nav-link px-2 text-muted">Home</a></li>
     </ul>
     <p class="text-center text-muted">© 2024 Leituras de Tarô</p>
 </footer>

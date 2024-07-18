@@ -1,9 +1,9 @@
 <?php
 
 //session_start();
-//use Imply\ListaDesafios03\controller\PlanoController;
+//use Imply\ListaDesafios03\controller\HomeController;
 //
-//$planoController = new PlanoController();
+//$planoController = new HomeController();
 //$planos = $planoController->listarPlanos();
 //if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['idplano']))
 //{

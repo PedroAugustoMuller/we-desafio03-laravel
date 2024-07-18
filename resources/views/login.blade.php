@@ -8,10 +8,18 @@
                          class="img-fluid" alt="Sample image">
                 </div>
                 <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                    <form method="post" action="/loginApi">
+                    <form method="post" action="{{route('login_api')}}">
                         @csrf
+                        <div class="errors" style="display: grid">
+                            @if($errors->has('email'))
+                                <h7 style="margin: 10px 10px 10px 0px; color: red">{{ $errors->first('email') }}</h7>
+                            @endif
+                            @if($errors->has('cpf'))
+                                <h7 style="margin: 10px 10px 10px 0px; color: red">{{ $errors->first('cpf') }}</h7>
+                            @endif
+                        </div>
                         <div data-mdb-input-init class="form-outline mb-4">
-                            <label class="form-label" for="email">Email</label>
+                                <label class="form-label" for="email">Email</label>
                             <input type="email" name="email" id="email" class="form-control form-control-lg"
                                    placeholder="Insira seu endereço de email"/>
                         </div>
@@ -25,9 +33,8 @@
                             <input type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg"
                                    style="padding-left: 2.5rem; padding-right: 2.5rem;" value="Login">
                         </div>
-
-                        @if(session()->get('erro') !== null)
-                            <div class="alert alert-danger" style="margin: 10px 10px 10px 0px;">{{session()->get('erro')}}</div>
+                        @if(session()->get('error') !== null)
+                            <div class="alert alert-danger" style="margin: 10px 10px 10px 0px;">{{session()->get('error')}}</div>
                         @else
                             <div class="alert alert-danger" style="margin: 10px 10px 10px 0px; visibility: hidden "></div>
                         @endif

@@ -15,8 +15,8 @@
             <tr>
                 <th scope="row">{{$i+1}}</th>
                 <td>{{date("d-m-Y", strtotime("+$i month", time()))}}</td>
-                <td>R$ {{session()->get('precoFinal')}}</td>
-                <td>{{session()->get('planoContratado')->dscplano}}</td>
+                <td>R$ {{session('precoFinal')}}</td>
+                <td>{{session('planoContratado')->dscplano}}</td>
                 <td style="color: red">Não pago</td>
             </tr>
         @endfor

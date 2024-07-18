@@ -22,14 +22,16 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email|',
-            'cpf' => 'required|string'
+            'email' => 'required|email',
+            'cpf' => 'required'
         ];
     }
     public function messages(): array
     {
         return [
-
+            'email.required' => 'Email precisa ser preenchido',
+            'email.email' => 'Formato do email inválido',
+            'cpf' => 'Cpf precisa ser preenchido'
         ];
     }
 }

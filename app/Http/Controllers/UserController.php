@@ -20,18 +20,18 @@ class UserController extends Controller
     {
         try{
             $data = [
-                'email' => $request->input("email"),
-                'cpf' => $request->input("cpf"),
+                'email' => $request->email,
+                'cpf' => $request->cpf,
             ];
             $response = UserService::login($data);
             if(array_key_exists("erro", $response)){
                 throw new Exception($response['erro']);
             }
             $request->session()->put('token', $response['token']);
-            $userData = (array) self::decodeToken();
+            $userData =  (array) User::decodeToken();
             $user = new User($userData);
             $request->session()->put('user', $user);
-            if(session()->get('idplano') == null){
+            if(session()->get('planoSelecionado') == null){
                 return redirect()->route('home');
             }
             return redirect()->route('associacao');
@@ -40,14 +40,7 @@ class UserController extends Controller
             return redirect()->route('login');
         }
     }
-
-    public static function decodeToken()
-    {
-        $token = session()->get('token');
-        $key = 'UGVkcm8gQXVndXN0byBNdWxsZXI=';
-        return JWT::decode($token, new Key($key, 'HS256'));
-    }
-    public static function logout(Request $request)
+    public static function logout()
     {
         session()->flush();
         return redirect()->route('login');

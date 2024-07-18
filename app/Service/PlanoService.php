@@ -26,7 +26,7 @@ class PlanoService
     }
     public static function getDescontoPlanoByUser($idPlano)
     {
-        $userId = session()->get("user")->userId;
+        $userId = session('user')->userId;
         $response = Http::post('https://ah.we.imply.com/pedro/desconto',[
             'idpessoa' => $userId,
             'idplano' => $idPlano,
