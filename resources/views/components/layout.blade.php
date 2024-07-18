@@ -37,12 +37,12 @@
                 @endif
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('home')}}">Planos</a>
+                    <a class="nav-link" href="{{route('home')}}">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('associacao')}}">Associacao</a>
                 </li>
-                @if(session('planoContratado')!=null)
+                @if(session()->get('planoContratado')!=null)
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('parcelas')}}">Parcelas</a>
                         </li>

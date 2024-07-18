@@ -1,10 +1,10 @@
 <x-layout>
     @section('pageTitle','Login - Portal das Cartas')
-    <section style="margin-top:200px ">
-        <div class="container-fluid h-custom" style="justify-content: center; align-items: center">
+    <section style="padding: 20px; background: #eee">
+        <div class="container-fluid h-custom shadow p-3 mb-5 bg-white rounded" style="justify-content: center; align-items: center;width: fit-content; border-radius: 10px; padding: 30px">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-md-9 col-lg-6 col-xl-5">
-                    <img src="https://guiadaalma-wp.s3.amazonaws.com/prd/b2c/wp-content/uploads/2022/08/leitura-de-tarot-1210x423.jpg"
+                    <img src="https://img.nsctotal.com.br/wp-content/uploads/2023/11/tarot.jpg"
                          class="img-fluid" alt="Sample image">
                 </div>
                 <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
