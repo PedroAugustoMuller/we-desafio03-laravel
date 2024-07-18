@@ -1,62 +1,47 @@
-<?php
-//session_start();
-//use Imply\ListaDesafios03\controller\UserController;
-//
-//$userController = new UserController();
-//if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email']) && isset($_POST['cpf']))
-//{
-//    $userController->login($_POST['email'], $_POST['cpf']);
-//}
-//?><!---->
-    <!doctype html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="../../public/styles/login.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-            crossorigin="anonymous"></script>
-    <title>Login</title>
-</head>
-<body>
-<section>
-    <div class="container-fluid h-custom">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col-md-9 col-lg-6 col-xl-5">
-                <img src="https://guiadaalma-wp.s3.amazonaws.com/prd/b2c/wp-content/uploads/2022/08/leitura-de-tarot-1210x423.jpg"
-                     class="img-fluid" alt="Sample image">
-            </div>
-            <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                <form method="post" action="/login">
-                    @csrf
-                    <!-- Email input -->
-                    <div data-mdb-input-init class="form-outline mb-4">
-                        <input type="email" name="email" id="email" class="form-control form-control-lg"
-                               placeholder="Enter a valid email address"/>
-                        <label class="form-label" for="email">Email</label>
-                    </div>
+<x-layout>
+    @section('pageTitle','Login - Portal das Cartas')
+    <section style="padding: 20px; background: #eee">
+        <div class="container-fluid h-custom shadow p-3 mb-5 bg-white rounded" style="justify-content: center; align-items: center;width: fit-content; border-radius: 10px; padding: 30px">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-md-9 col-lg-6 col-xl-5">
+                    <img src="https://img.nsctotal.com.br/wp-content/uploads/2023/11/tarot.jpg"
+                         class="img-fluid" alt="Sample image">
+                </div>
+                <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+                    <form method="post" action="{{route('login_api')}}">
+                        @csrf
+                        <div class="errors" style="display: grid">
+                            @if($errors->has('email'))
+                                <h7 style="margin: 10px 10px 10px 0px; color: red">{{ $errors->first('email') }}</h7>
+                            @endif
+                            @if($errors->has('cpf'))
+                                <h7 style="margin: 10px 10px 10px 0px; color: red">{{ $errors->first('cpf') }}</h7>
+                            @endif
+                        </div>
+                        <div data-mdb-input-init class="form-outline mb-4">
+                                <label class="form-label" for="email">Email</label>
+                            <input type="email" name="email" id="email" class="form-control form-control-lg"
+                                   placeholder="Insira seu endereço de email"/>
+                        </div>
 
-                    <!-- Password input -->
-                    <div data-mdb-input-init class="form-outline mb-3">
-                        <input type="password" name="cpf" id="cpf" class="form-control form-control-lg"
-                               placeholder="Enter password"/>
-                        <label class="form-label" for="cpf">CPF</label>
-                    </div>
-                    <div class="text-center text-lg-start mt-4 pt-2">
-                        <input type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg"
-                               style="padding-left: 2.5rem; padding-right: 2.5rem;" value="Login">
-                    </div>
-                    <?php //include '../src/view/includes/error.php' ?>
-                </form>
+                        <div data-mdb-input-init class="form-outline mb-3">
+                            <label class="form-label" for="cpf">CPF</label>
+                            <input type="text" name="cpf" id="cpf" class="form-control form-control-lg"
+                                   placeholder="Insira seu CPF"/>
+                        </div>
+                        <div class="text-center text-lg-start mt-4 pt-2">
+                            <input type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg"
+                                   style="padding-left: 2.5rem; padding-right: 2.5rem;" value="Login">
+                        </div>
+                        @if(session()->get('error') !== null)
+                            <div class="alert alert-danger" style="margin: 10px 10px 10px 0px;">{{session()->get('error')}}</div>
+                        @else
+                            <div class="alert alert-danger" style="margin: 10px 10px 10px 0px; visibility: hidden "></div>
+                        @endif
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
-    <div
-</section>
-</body>
-</html>
+    </section>
+</x-layout>
+

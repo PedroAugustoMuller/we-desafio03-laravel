@@ -1,8 +1,9 @@
 <?php
+
 //session_start();
-//use Imply\ListaDesafios03\controller\PlanoController;
+//use Imply\ListaDesafios03\controller\HomeController;
 //
-//$planoController = new PlanoController();
+//$planoController = new HomeController();
 //$planos = $planoController->listarPlanos();
 //if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['idplano']))
 //{
@@ -11,27 +12,18 @@
 //}
 //?><!---->
 <x-layout>
-    @section('pageTitle','Home')
+    @section('pageTitle','Home - Portal das Cartas')
+    <style>
+        .container-planos {
+            max-width: 1200px;
+            margin: 0 auto auto 70px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: minmax(100px, auto);
+            gap: 10px;
+        }
+    </style>
     <section style="background-color: #eee;">
-        <div class="container py-5">
-            <h4 class="text-center mb-5"><strong>Planos</strong></h4>
-            <div class="container-planos">
-                @foreach($planos as $plano)
-                    <div class="card" style="width:300px">
-                        <img class="card-img-top" src="{{$plano->imagem}}" alt="Card image">
-                        <div class="card-body">
-                            <h4 class="card-title">{{$plano->getTitulo()}}</h4>
-                            <p class="card-text">{{$plano->getDescricao()}}</p>
-                            <p class="card-text">Mensalidade: R$ {{$plano->getValor()}}</p>
-                            <form method="POST" action="/plano">
-                                <input type="hidden" value="{{$plano->getId()}}" name="idplano">
-                                <input type="submit" class="btn btn-primary" value="Aderir ao plano">
-                                @csrf
-                            </form>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
+        <x-planos.planos :planos="$planos??null"></x-planos.planos>
     </section>
 </x-layout>
